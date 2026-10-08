@@ -116,6 +116,11 @@ def main():
                 del page[box]
         page[NameObject("/MediaBox")] = RectangleObject([0, 0, w - BLEED, h])
 
+    # Lossless size reduction: compress page content and drop duplicate objects.
+    for page in writer.pages:
+        page.compress_content_streams(level=9)
+    writer.compress_identical_objects(remove_identicals=True, remove_orphans=True)
+
     writer.add_metadata({"/Title": "The 5-Step Book Launch for Experts",
                          "/Author": "Karina G. Sanchez"})
     with open(out_path, "wb") as fh:
