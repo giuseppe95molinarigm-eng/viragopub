@@ -1,0 +1,9 @@
+{
+  "name": "five-step-book-launch-interior",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "pagedjs": "0.4.3",
+    "playwright-core": "1.56.1"
+  }
+}

@@ -1,0 +1,110 @@
+/* The 5-Step Book Launch for Experts — reflowable EPUB.
+   Body text follows the reader's font settings; display type is embedded. */
+@font-face { font-family: "Anton"; src: url(../fonts/Anton-Regular.ttf); }
+@font-face { font-family: "Oswald"; font-weight: 500; src: url(../fonts/Oswald-Medium.ttf); }
+@font-face { font-family: "Oswald"; font-weight: 600; src: url(../fonts/Oswald-SemiBold.ttf); }
+
+body { margin: 0 3%; line-height: 1.5; }
+p { margin: 0; text-indent: 1.2em; text-align: left; }
+a { color: inherit; }
+img { max-width: 100%; }
+
+.front { margin-top: 2em; }
+.title-page { text-align: left; }
+.title-page p { text-indent: 0; }
+.tp-five { display: none; }
+.tp-title { font-family: "Anton", sans-serif; font-weight: normal; font-size: 2.6em; line-height: 1.05; text-transform: uppercase; margin: 1em 0 0.3em; }
+.tp-for span { font-family: "Oswald", sans-serif; font-weight: 600; letter-spacing: 0.15em; border: 2px solid #161412; padding: 0.1em 0.5em; text-transform: uppercase; }
+.tp-sub { font-family: "Oswald", sans-serif; font-weight: 500; text-transform: uppercase; margin-top: 1.5em; border-top: 3px solid #e5531f; padding-top: 0.6em; }
+.tp-sub .hl { background: #f5c21b; padding: 0 0.2em; }
+.tp-author { font-family: "Oswald", sans-serif; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 3em; }
+
+.copyright p { text-indent: 0; font-size: 0.8em; margin-bottom: 0.7em; }
+.c-strong { font-weight: bold; }
+.dedication p { text-align: center; text-indent: 0; font-style: italic; margin: 1em 5%; }
+.dedication-inner { margin-top: 4em; }
+
+.toc-title { font-family: "Anton", sans-serif; font-weight: normal; text-transform: uppercase; font-size: 2em; }
+.toc-list { list-style: none; padding: 0; border-top: 2px solid #161412; }
+.toc-list li { border-bottom: 1px solid #cfc8bf; padding: 0.35em 0; }
+.toc-list a { text-decoration: none; font-family: "Oswald", sans-serif; font-weight: 500; text-transform: uppercase; }
+.toc-num { color: #e5531f; font-weight: 600; margin-right: 0.6em; }
+
+.insert-page { text-align: center; page-break-before: always; }
+.insert-page img { width: 100%; }
+.insert-links { text-indent: 0; text-align: center; font-size: 0.85em; }
+.insert-links a { display: block; margin: 0.3em 0; }
+
+.opener { border-top: 6px solid #e5531f; padding-top: 0.8em; margin: 1em 0 1.5em; }
+.opener-label { font-family: "Oswald", sans-serif; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #e5531f; font-size: 0.8em; text-indent: 0; }
+.opener-title { font-family: "Anton", sans-serif; font-weight: normal; text-transform: uppercase; font-size: 2em; line-height: 1.1; margin: 0.2em 0; }
+.opener-tag { text-indent: 0; }
+.opener-tag span { background: #f5c21b; font-family: "Anton", sans-serif; text-transform: uppercase; padding: 0.1em 0.4em; }
+
+.first, .section-head + p, .box-title + p, .mini-head + p, .pullquote + p, .chart + p, ul + p, ol + p { text-indent: 0; }
+.dropcap::first-letter { font-family: "Anton", sans-serif; color: #e5531f; font-size: 2.6em; float: left; line-height: 0.9; margin: 0.05em 0.08em 0 0; }
+
+.section-head { font-family: "Oswald", sans-serif; font-weight: 600; text-transform: uppercase; font-size: 1.05em; border-left: 4px solid #e5531f; padding-left: 0.5em; margin: 1.6em 0 0.5em; page-break-after: avoid; }
+.blank { display: inline-block; min-width: 5em; border-bottom: 1px solid #161412; }
+
+.pullquote { border-top: 2px solid #161412; border-bottom: 2px solid #161412; margin: 1.2em 0; padding: 0.6em 0; }
+.pullquote p { font-family: "Anton", sans-serif; text-transform: uppercase; font-size: 1.3em; line-height: 1.2; text-indent: 0; }
+.pullquote em { font-style: normal; color: #e5531f; }
+
+.activity, .worksheet, .giveaway { margin: 1.5em 0; padding: 0 0.8em 0.8em; background: #f5f0e7; border-top: 3px solid #e5531f; }
+.worksheet { background: transparent; border: 1px solid #161412; border-top: 3px solid #161412; }
+.box-label { text-indent: 0; margin: 0 0 0.5em -0.8em; }
+.box-label span { background: #e5531f; color: #fff; font-family: "Oswald", sans-serif; font-weight: 600; font-size: 0.7em; letter-spacing: 0.25em; text-transform: uppercase; padding: 0.2em 0.7em; }
+.worksheet .box-label span { background: #161412; }
+.box-title { font-family: "Anton", sans-serif; font-weight: normal; text-transform: uppercase; font-size: 1.2em; margin: 0 0 0.4em; }
+.activity p + p, .worksheet p + p, .giveaway p + p { text-indent: 0; margin-top: 0.5em; }
+.mini-head { font-family: "Oswald", sans-serif; font-weight: 600; text-transform: uppercase; font-size: 0.9em; color: #e5531f; margin: 0.8em 0 0.3em; }
+.column-head { color: #161412; }
+.checklist { list-style: none; padding-left: 0; }
+.checklist li { margin-bottom: 0.3em; }
+.checklist li:before { content: "☐ "; }
+
+.signoff { text-align: center; margin: 1.5em 0; }
+.signoff p { text-indent: 0; text-align: center; }
+.signoff-big span { background: #f5c21b; font-family: "Anton", sans-serif; font-size: 1.5em; text-transform: uppercase; padding: 0.1em 0.4em; }
+.signoff-name { font-family: "Oswald", sans-serif; letter-spacing: 0.3em; font-size: 0.8em; margin-top: 0.4em; }
+figure { margin: 1em 0; text-align: center; }
+
+.kicker { font-family: "Oswald", sans-serif; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: #e5531f; font-size: 0.75em; text-indent: 0; }
+.roadmap-title, .chart-title { font-family: "Anton", sans-serif; font-weight: normal; text-transform: uppercase; font-size: 1.6em; margin: 0.2em 0; }
+.roadmap-title span { color: #e5531f; }
+.roadmap-sub { font-style: italic; text-indent: 0; margin-bottom: 0.8em; }
+.prove-step { margin: 0.8em 0; overflow: hidden; }
+.prove-letter { float: left; width: 1.6em; text-align: center; background: #e5531f; color: #fff; font-family: "Anton", sans-serif; font-size: 1.8em; line-height: 1.4; margin-right: 0.4em; }
+.prove-step.alt .prove-letter { background: #161412; }
+.prove-text p { text-indent: 0; }
+.step-no { font-family: "Oswald", sans-serif; color: #e5531f; font-size: 0.75em; letter-spacing: 0.25em; text-transform: uppercase; }
+.step-name { font-family: "Oswald", sans-serif; font-weight: 600; text-transform: uppercase; }
+.prove-strip { margin: 1em 0; }
+.prove-cell { border-left: 4px solid #e5531f; padding: 0.2em 0.6em; margin-bottom: 0.3em; background: #f5f0e7; }
+.prove-cell.alt { border-left-color: #161412; }
+.pl { font-family: "Anton", sans-serif; font-size: 1.3em; color: #e5531f; margin-right: 0.5em; }
+.pn { font-family: "Oswald", sans-serif; font-weight: 600; text-transform: uppercase; }
+
+table { border-collapse: collapse; width: 100%; font-size: 0.85em; margin: 0.5em 0; }
+th { background: #161412; color: #fff; font-family: "Oswald", sans-serif; font-weight: 600; text-transform: uppercase; font-size: 0.8em; padding: 0.4em; }
+th.hl { background: #e5531f; }
+td { border-bottom: 1px solid #cfc8bf; padding: 0.4em; text-align: center; }
+td:first-child { text-align: left; }
+tr.key td { font-weight: bold; }
+.research td { border: 1px solid #9f978e; height: 1.6em; }
+.bars-title { font-family: "Oswald", sans-serif; font-weight: 600; text-transform: uppercase; font-size: 0.75em; text-indent: 0; margin-top: 0.8em; }
+.bar-row { margin: 0.3em 0; }
+.bar-label { display: block; font-size: 0.75em; text-transform: uppercase; }
+.bar { display: block; background: #e5531f; color: #fff; text-align: right; padding: 0.1em 0.4em; font-weight: bold; font-size: 0.8em; }
+.bar.dark { background: #161412; }
+.callout-eq { border: 2px solid #161412; border-left: 8px solid #e5531f; padding: 0.5em 0.8em; margin-top: 0.8em; }
+.eq { font-family: "Anton", sans-serif; font-size: 1.6em; color: #e5531f; margin-right: 0.4em; }
+.eq-text { font-family: "Oswald", sans-serif; font-weight: 600; text-transform: uppercase; }
+.chart-note { font-style: italic; font-size: 0.85em; text-indent: 0; margin: 0.6em 0; }
+.ask-box { border-left: 4px solid #e5531f; padding-left: 0.7em; margin: 1em 0; }
+.ask-box p { text-indent: 0; }
+.ask-label { font-family: "Oswald", sans-serif; font-weight: 600; text-transform: uppercase; color: #e5531f; font-size: 0.8em; letter-spacing: 0.2em; }
+.cta { background: #f5f0e7; border-left: 4px solid #e5531f; padding: 0.6em; margin-top: 1em; text-indent: 0; }
+.ref-head { font-family: "Oswald", sans-serif; font-weight: 600; text-transform: uppercase; color: #e5531f; margin: 1em 0 0.3em; }
+p.ref { text-indent: 0; font-size: 0.85em; margin-bottom: 0.4em; word-wrap: break-word; }

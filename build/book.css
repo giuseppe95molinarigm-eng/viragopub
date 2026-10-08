@@ -1,0 +1,336 @@
+/* The 5-Step Book Launch for Experts — print interior (6 x 9 in, KDP, with bleed)
+   Rendered with Paged.js in Chromium. Bleed is added on all sides here and the
+   spine-side bleed is trimmed afterwards by finalize_pdf.py (KDP: 6.125 x 9.25 in). */
+
+@font-face { font-family: "Anton"; src: url(../assets/fonts/Anton-Regular.ttf); }
+@font-face { font-family: "Oswald"; font-weight: 400; src: url(../assets/fonts/Oswald-Regular.ttf); }
+@font-face { font-family: "Oswald"; font-weight: 500; src: url(../assets/fonts/Oswald-Medium.ttf); }
+@font-face { font-family: "Oswald"; font-weight: 600; src: url(../assets/fonts/Oswald-SemiBold.ttf); }
+@font-face { font-family: "Oswald"; font-weight: 700; src: url(../assets/fonts/Oswald-Bold.ttf); }
+@font-face { font-family: "Source Serif 4"; font-weight: 400; src: url(../assets/fonts/SourceSerif4-Regular.ttf); }
+@font-face { font-family: "Source Serif 4"; font-weight: 600; src: url(../assets/fonts/SourceSerif4-SemiBold.ttf); }
+@font-face { font-family: "Source Serif 4"; font-weight: 700; src: url(../assets/fonts/SourceSerif4-Bold.ttf); }
+@font-face { font-family: "Source Serif 4"; font-style: italic; font-weight: 400; src: url(../assets/fonts/SourceSerif4-Italic.ttf); }
+@font-face { font-family: "Source Serif 4"; font-style: italic; font-weight: 600 700; src: url(../assets/fonts/SourceSerif4-SemiBoldItalic.ttf); }
+
+:root {
+  --orange: #e5531f;
+  --ink: #161412;
+  --grey: #5d5853;
+  --rule: #cfc8bf;
+  --cream: #f5f0e7;
+  --yellow: #f5c21b;
+  --head: "Anton", "Oswald", sans-serif;
+  --label: "Oswald", sans-serif;
+  --serif: "Source Serif 4", Georgia, serif;
+}
+
+/* ------------------------------------------------------------------ pages */
+@page {
+  size: 6in 9in;
+  bleed: 0.125in;
+  marks: none;
+  margin: 0.82in 0.62in 0.8in 0.78in;
+  @bottom-center { content: none; }
+}
+@page :left {
+  margin: 0.82in 0.78in 0.8in 0.62in;
+  @top-left {
+    content: "The 5-Step Book Launch  ·  For Experts";
+    font-family: var(--label); font-size: 6.4pt; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--orange); font-weight: 600;
+    vertical-align: bottom; padding-bottom: 0.2in;
+  }
+  @bottom-left {
+    content: "— " counter(page);
+    font-family: var(--label); font-weight: 600; font-size: 8pt; color: var(--ink);
+    vertical-align: top; padding-top: 0.28in;
+  }
+}
+@page :right {
+  @top-right {
+    content: string(running);
+    font-family: var(--label); font-size: 6.4pt; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--grey); font-weight: 500;
+    vertical-align: bottom; padding-bottom: 0.2in;
+  }
+  @bottom-right {
+    content: counter(page) " —";
+    font-family: var(--label); font-weight: 600; font-size: 8pt; color: var(--ink);
+    vertical-align: top; padding-top: 0.28in;
+  }
+}
+
+/* Front matter: no running heads or folios */
+@page front {
+  @top-left { content: none; } @top-right { content: none; }
+  @bottom-left { content: none; } @bottom-right { content: none; }
+}
+@page insert {
+  margin: 0;
+  @top-left { content: none; } @top-right { content: none; }
+  @bottom-left { content: none; } @bottom-right { content: none; }
+}
+/* Chapter opening pages: no running head, folio stays */
+@page chapter:first {
+  @top-left { content: none; } @top-right { content: none; }
+}
+@page simple:first {
+  @top-left { content: none; } @top-right { content: none; }
+}
+
+/* ------------------------------------------------------------------ base */
+html { font-family: var(--serif); color: var(--ink); font-size: 10.2pt; line-height: 1.47;
+  font-variant-numeric: oldstyle-nums proportional-nums; }
+body { margin: 0; }
+p { margin: 0; text-align: justify; hyphens: auto; orphans: 2; widows: 2; text-indent: 1.15em;
+  hyphenate-limit-chars: 7 3 3; }
+a { color: inherit; text-decoration: none; }
+em, i { font-style: italic; }
+strong, b { font-weight: 700; }
+
+.front { page: front; break-before: page; }
+.insert-page { page: insert; break-before: page; height: 9in; }
+.chapter { page: chapter; break-before: right; }
+.chapter-simple { page: simple; }
+.title-page { break-before: right; }
+.dedication { break-before: right; }
+.toc { break-before: right; }
+.insert-audiobook { break-before: right; }
+
+/* Running-head source (invisible, feeds string(running)) */
+.rh-src { string-set: running content(text); height: 0; overflow: hidden; margin: 0; font-size: 0; text-indent: 0; }
+
+/* ------------------------------------------------------------------ title page */
+.title-page { text-align: left; padding-top: 0.55in; position: relative; height: 7.3in; }
+.title-page p { text-align: left; text-indent: 0; hyphens: none; }
+.tp-five { position: absolute; right: -0.2in; top: -0.4in; font-family: var(--head); font-size: 300pt;
+  line-height: 1; color: #f3e9e2; z-index: -1; }
+.tp-title { font-family: var(--head); font-weight: 400; font-size: 44pt; line-height: 0.98; text-transform: uppercase;
+  margin: 0; letter-spacing: 0.005em; }
+.tp-for { margin-top: 0.12in !important; }
+.tp-for span { display: inline-block; font-family: var(--label); font-weight: 600; letter-spacing: 0.18em;
+  font-size: 13pt; text-transform: uppercase; border: 1.4pt solid var(--ink); padding: 2pt 8pt; }
+.tp-sub { font-family: var(--label); font-weight: 500; font-size: 12pt; line-height: 1.35; text-transform: uppercase;
+  margin-top: 0.35in !important; width: 3.6in; letter-spacing: 0.02em; border-top: 2pt solid var(--orange); padding-top: 10pt; }
+.tp-sub .hl { background: var(--yellow); padding: 0 3pt; font-weight: 700; }
+.tp-author { position: absolute; bottom: 0; left: 0; font-family: var(--label); font-weight: 600; font-size: 12pt;
+  letter-spacing: 0.32em; text-transform: uppercase; }
+.tp-author::before { content: ""; display: inline-block; width: 0.35in; height: 1.4pt; background: var(--orange);
+  vertical-align: middle; margin-right: 10pt; }
+
+/* ------------------------------------------------------------------ copyright */
+.copyright { position: relative; height: 7.38in; }
+.copyright-inner { position: absolute; bottom: 0; left: 0; right: 0; }
+.copyright p { font-size: 7.8pt; line-height: 1.5; text-indent: 0; text-align: left; margin-bottom: 7pt; color: #2b2724; hyphens: none; }
+.copyright .c-strong { font-family: var(--label); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 8.5pt; color: var(--ink); }
+.copyright strong { font-weight: 600; }
+
+/* ------------------------------------------------------------------ dedication */
+.dedication-inner { padding-top: 2.1in; text-align: center; }
+.dedication-inner::before { content: ""; display: block; width: 0.45in; height: 2pt; background: var(--orange); margin: 0 auto 18pt; }
+.dedication p { text-align: center; text-indent: 0; font-style: italic; font-size: 11pt; line-height: 1.6;
+  margin: 0 0.2in 14pt; hyphens: none; }
+.dedication strong { font-weight: 600; }
+
+/* ------------------------------------------------------------------ contents */
+.toc-title { font-family: var(--head); font-weight: 400; font-size: 34pt; text-transform: uppercase; margin: 0.2in 0 0.08in;
+  line-height: 1; }
+.toc-title::before { content: "Inside this book"; display: block; font-family: var(--label); font-size: 7pt;
+  letter-spacing: 0.3em; color: var(--orange); font-weight: 600; margin-bottom: 6pt; }
+.toc-list { list-style: none; margin: 0.22in 0 0; padding: 0; border-top: 1.5pt solid var(--ink); }
+.toc-list li { border-bottom: 0.5pt solid var(--rule); }
+.toc-list a { display: flex; align-items: baseline; padding: 4.6pt 0; font-family: var(--label); text-transform: uppercase;
+  font-size: 8.6pt; letter-spacing: 0.03em; line-height: 1.25; }
+.toc-num { width: 0.32in; flex: none; color: var(--orange); font-weight: 700; font-size: 9pt; }
+.toc-text { flex: 1; font-weight: 500; padding-right: 8pt; }
+.toc-matter .toc-text { padding-left: 0.32in; color: var(--grey); }
+.toc-pg { font-weight: 700; font-size: 9pt; min-width: 0.25in; text-align: right; }
+
+/* ------------------------------------------------------------------ chapter openers */
+.opener { position: relative; height: 2.95in; margin: 0 0 0.3in; color: #fff; padding-top: 0.48in; box-sizing: border-box; }
+.opener-label { font-family: var(--label); font-weight: 600; font-size: 7.2pt; letter-spacing: 0.4em; text-transform: uppercase;
+  text-align: left; text-indent: 0; display: flex; align-items: center; gap: 10pt; }
+.opener-label::after { content: ""; flex: 1; height: 0.6pt; background: rgba(255,255,255,0.6); }
+.opener-title { font-family: var(--head); font-weight: 400; text-transform: uppercase; font-size: 31pt; line-height: 1.0;
+  margin: 10pt 0 0; letter-spacing: 0.005em; max-width: 4.3in; position: relative; }
+.opener-title.long { font-size: 26pt; }
+.opener-tag { text-indent: 0; text-align: left; margin-top: 12pt; position: relative; }
+.opener-tag span { display: inline-block; background: var(--yellow); color: var(--ink); font-family: var(--head);
+  text-transform: uppercase; font-size: 12pt; padding: 3pt 8pt 2pt; transform: rotate(-1.5deg); }
+.ghost-num { position: absolute; right: -0.12in; top: 0.15in; font-family: var(--head); font-size: 150pt; line-height: 1;
+  color: rgba(255,255,255,0.16); }
+.opener-simple { height: auto; color: var(--ink); padding-top: 0.3in; margin-bottom: 0.3in; }
+.opener-simple .opener-label { color: var(--orange); }
+.opener-simple .opener-label::after { background: var(--rule); }
+.opener-simple .opener-title { font-size: 28pt; }
+
+/* the orange band itself is painted on the page sheet (see render.mjs: .pagedjs_chapter_first_page) */
+.pagedjs_chapter_first_page .pagedjs_sheet {
+  background:
+    repeating-linear-gradient(180deg, rgba(0,0,0,0) 0 2.2px, rgba(0,0,0,0.035) 2.2px 3px),
+    linear-gradient(180deg, var(--orange) 0, var(--orange) 3.82in, transparent 3.82in);
+  background-size: 100% 3.82in, 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* ------------------------------------------------------------------ body */
+.chapter-body > p.first, .section-head + p, .mini-head + p, h3 + p, .chart + p, .pullquote + p,
+.prove-roadmap + p, .prove-strip + p, .ask-box + p, .insert-figure + p, figure + p, .box-title + p,
+.checklist + p, ul + p, ol + p, .chart-note + p, .ref-head + p, .signoff + p { text-indent: 0; }
+
+.dropcap::first-letter { font-family: var(--head); color: var(--orange); float: left; font-size: 46pt; line-height: 0.8;
+  padding: 3pt 4pt 0 0; margin-top: 1pt; }
+
+.section-head { font-family: var(--label); font-weight: 600; text-transform: uppercase; font-size: 10.8pt; letter-spacing: 0.02em;
+  line-height: 1.2; margin: 17pt 0 5pt; padding-left: 9pt; border-left: 3.2pt solid var(--orange); break-after: avoid; }
+.chapter-body > .section-head:first-child { margin-top: 0; }
+
+.chapter-body ol, .chapter-body ul { margin: 6pt 0 7pt; padding-left: 1.5em; }
+.chapter-body li { margin-bottom: 3pt; text-align: left; hyphens: manual; }
+.chapter-body ol li::marker { font-family: var(--label); font-weight: 600; color: var(--orange); }
+.chapter-body ul li::marker { color: var(--orange); }
+
+.blank { display: inline-block; min-width: 1.05in; border-bottom: 0.7pt solid var(--ink); line-height: 1; }
+
+/* pull quote */
+.pullquote { margin: 13pt 0 12pt; padding: 11pt 0 10pt; border-top: 1.4pt solid var(--ink); border-bottom: 1.4pt solid var(--ink);
+  position: relative; break-inside: avoid; }
+.pullquote::after { content: "”"; position: absolute; right: 0; top: 2pt; font-family: var(--head); font-size: 40pt;
+  color: var(--orange); line-height: 1; }
+.pullquote p { font-family: var(--head); font-size: 16pt; line-height: 1.12; text-transform: uppercase; text-align: left;
+  text-indent: 0; padding-right: 0.4in; hyphens: none; }
+.pullquote em { font-style: normal; color: var(--orange); }
+
+/* boxes: activity, worksheet, giveaway */
+.activity, .worksheet, .giveaway { margin: 16pt 0 12pt; background: var(--cream); border-top: 2.2pt solid var(--orange);
+  padding: 0 12pt 11pt; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.box-label { text-indent: 0; text-align: left; margin: 0 0 7pt -12pt; }
+.box-label span { display: inline-block; background: var(--orange); color: #fff; font-family: var(--label); font-weight: 600;
+  font-size: 6.6pt; letter-spacing: 0.3em; text-transform: uppercase; padding: 3pt 9pt 2.5pt 12pt; }
+.box-title { font-family: var(--head); font-weight: 400; text-transform: uppercase; font-size: 14.5pt; line-height: 1.08;
+  margin: 0 0 6pt; break-after: avoid; }
+.activity p, .worksheet p, .giveaway p { font-size: 9.6pt; line-height: 1.45; }
+.activity p + p, .worksheet p + p, .giveaway p + p { text-indent: 0; margin-top: 5pt; }
+.worksheet { background: transparent; border: 1pt solid var(--ink); border-top: 2.2pt solid var(--ink); }
+.worksheet .box-label span { background: var(--ink); }
+.worksheet .box-label span::before { content: "▣  "; }
+.activity .box-label span::before { content: "✎  "; }
+
+.mini-head { font-family: var(--label); font-weight: 600; font-size: 8.4pt; text-transform: uppercase; letter-spacing: 0.06em;
+  margin: 9pt 0 3pt; color: var(--orange); break-after: avoid; }
+.column-head { color: var(--ink); border-bottom: 0.6pt solid var(--rule); padding-bottom: 2pt; }
+
+.checklist { list-style: none; padding-left: 0 !important; margin: 4pt 0 6pt !important; }
+.checklist li { position: relative; padding-left: 16pt; font-size: 9.4pt; line-height: 1.38; margin-bottom: 3.2pt; }
+.checklist li::before { content: ""; position: absolute; left: 0; top: 2.2pt; width: 8pt; height: 8pt; border: 0.9pt solid var(--ink);
+  background: #fff; }
+
+.activity ul, .activity ol, .worksheet ul, .giveaway ul { font-size: 9.5pt; line-height: 1.42; }
+
+/* giveaway + sign-off */
+.insert-figure { margin: 10pt 0 4pt; break-inside: avoid; }
+.insert-figure img { width: 100%; display: block; }
+.giveaway .insert-figure { margin: 9pt 0 0; }
+.signoff { text-align: center; margin: 18pt 0 4pt; break-inside: avoid; }
+.signoff p { text-align: center; text-indent: 0; }
+.signoff-lead { font-style: italic; font-size: 10.5pt; }
+.signoff-big span { display: inline-block; background: var(--yellow); font-family: var(--head); font-size: 22pt;
+  text-transform: uppercase; padding: 3pt 10pt 1pt; margin-top: 4pt; }
+.signoff-name { font-family: var(--label); font-weight: 600; letter-spacing: 0.32em; font-size: 7.5pt; margin-top: 8pt !important; }
+.signoff::after { content: "◆"; display: block; color: var(--orange); font-size: 7pt; margin: 9pt auto 0;
+  width: 2.6in; border-top: 0.7pt solid var(--ink); line-height: 0; padding-top: 0; }
+.call-insert { margin: 12pt 0 10pt; }
+
+/* ------------------------------------------------------------------ PROVE */
+.prove-roadmap { margin: 14pt 0 10pt; }
+.prove-step { break-inside: avoid; }
+.roadmap-sub { break-after: avoid; }
+.kicker { font-family: var(--label); font-weight: 600; font-size: 6.8pt; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--orange); text-indent: 0; text-align: left; }
+.roadmap-title { font-family: var(--head); font-weight: 400; font-size: 30pt; line-height: 0.98; text-transform: uppercase; margin: 3pt 0 5pt; }
+.roadmap-title span { color: var(--orange); }
+.roadmap-sub { font-style: italic; font-size: 9pt; color: var(--grey); text-indent: 0; text-align: left; margin-bottom: 9pt !important; }
+.prove-step { display: flex; gap: 11pt; margin-bottom: 8pt; align-items: flex-start; }
+.prove-letter { flex: none; width: 0.48in; height: 0.52in; background: var(--orange); color: #fff; font-family: var(--head);
+  font-size: 26pt; display: flex; align-items: center; justify-content: center; line-height: 1; }
+.prove-step.alt .prove-letter { background: var(--ink); }
+.prove-text p { text-indent: 0; text-align: left; hyphens: none; }
+.step-no { font-family: var(--label); font-weight: 600; font-size: 6.3pt; letter-spacing: 0.3em; text-transform: uppercase; color: var(--orange); }
+.step-name { font-family: var(--label); font-weight: 600; font-size: 10.6pt; text-transform: uppercase; line-height: 1.15; margin: 1pt 0 2pt !important; }
+.step-body { font-size: 9.1pt; line-height: 1.4; }
+
+.prove-strip { display: flex; gap: 3pt; margin: 10pt 0 12pt; break-inside: avoid; }
+.prove-cell { flex: 1; border-top: 3pt solid var(--orange); background: var(--cream); padding: 6pt 5pt 7pt; text-align: center; }
+.prove-cell.alt { border-top-color: var(--ink); }
+.prove-cell .pl { display: block; font-family: var(--head); font-size: 24pt; line-height: 1; color: var(--orange); }
+.prove-cell.alt .pl { color: var(--ink); }
+.prove-cell .pn { display: block; font-family: var(--label); font-weight: 600; font-size: 6.6pt; text-transform: uppercase;
+  letter-spacing: 0.04em; line-height: 1.2; margin-top: 4pt; }
+
+/* ------------------------------------------------------------------ charts */
+.chart { margin: 14pt 0 10pt; break-inside: avoid; }
+.chart-title { font-family: var(--head); font-weight: 400; font-size: 19pt; line-height: 1.0; text-transform: uppercase; margin: 3pt 0 9pt; }
+table { border-collapse: collapse; width: 100%; }
+.royalty { font-size: 7.9pt; line-height: 1.25; }
+.royalty th { font-family: var(--label); font-weight: 600; text-transform: uppercase; font-size: 6.4pt; letter-spacing: 0.06em;
+  background: var(--ink); color: #fff; padding: 5pt 6pt; text-align: center; vertical-align: bottom; }
+.royalty th:first-child { text-align: left; }
+.royalty th.hl { background: var(--orange); }
+.royalty td { padding: 4.4pt 6pt; border-bottom: 0.5pt solid var(--rule); text-align: center; font-family: var(--label);
+  font-weight: 500; font-size: 8.2pt; }
+.royalty td:first-child { text-align: left; font-family: var(--serif); font-weight: 400; font-size: 7.9pt; width: 42%; }
+.royalty tbody tr:nth-child(even) td { background: #faf7f2; }
+.royalty td.hl { color: var(--ink); }
+.royalty tr.key td { font-weight: 700; font-size: 9.5pt; }
+.royalty tr.key td:first-child { font-weight: 700; font-size: 7.9pt; }
+.royalty tr.key td.hl { color: var(--orange); }
+.royalty tr.small td:not(:first-child) { font-size: 7pt; }
+.royalty td.merged { font-size: 6.8pt !important; font-weight: 500; }
+.bars { margin-top: 10pt; }
+.bars-title { font-family: var(--label); font-weight: 600; font-size: 6.6pt; letter-spacing: 0.12em; text-transform: uppercase;
+  text-indent: 0; margin-bottom: 4pt !important; }
+.bar-row { display: flex; align-items: center; margin-bottom: 3pt; }
+.bar-label { width: 0.95in; flex: none; font-family: var(--label); font-size: 6.4pt; text-transform: uppercase; color: var(--grey);
+  letter-spacing: 0.04em; line-height: 1.1; }
+.bar-track { flex: 1; }
+.bar { display: block; background: var(--orange); color: #fff; font-family: var(--label); font-weight: 700; font-size: 7pt;
+  text-align: right; padding: 1.5pt 5pt; box-sizing: border-box; }
+.bar.dark { background: var(--ink); }
+.callout-eq { display: flex; align-items: center; gap: 11pt; margin-top: 10pt; border: 1.6pt solid var(--ink);
+  border-left: 7pt solid var(--orange); padding: 7pt 10pt; }
+.callout-eq .eq { font-family: var(--head); font-size: 25pt; color: var(--orange); line-height: 1; flex: none; }
+.callout-eq .eq-text { font-family: var(--label); font-weight: 600; font-size: 8.2pt; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1.3; }
+.chart-note { font-style: italic; font-size: 8.3pt; color: var(--grey); text-indent: 0 !important; margin: 7pt 0 9pt !important; text-align: left; }
+.ask-box { border-left: 3pt solid var(--orange); padding: 2pt 0 2pt 10pt; margin: 10pt 0 6pt; break-inside: avoid; }
+.ask-box p { text-indent: 0; font-size: 9.6pt; }
+.ask-label { font-family: var(--label); font-weight: 600; font-size: 7pt; letter-spacing: 0.24em; text-transform: uppercase; color: var(--orange); }
+
+.research { font-size: 7.4pt; margin-top: 2pt; }
+.research th { font-family: var(--label); font-weight: 600; text-transform: uppercase; font-size: 6.2pt; letter-spacing: 0.06em;
+  background: var(--ink); color: #fff; padding: 4.5pt 4pt; text-align: center; }
+.research th:first-child { text-align: left; width: 34%; }
+.research th.book-col:nth-child(even) { background: var(--orange); }
+.research td { border: 0.6pt solid #9f978e; height: 0.33in; padding: 3pt 5pt; vertical-align: middle; background: #fff; }
+.research td:first-child { font-family: var(--serif); font-size: 7.4pt; line-height: 1.22; background: var(--cream); }
+
+/* ------------------------------------------------------------------ CTA, references */
+.cta { margin-top: 10pt !important; padding: 8pt 10pt; background: var(--cream); border-left: 3pt solid var(--orange);
+  text-indent: 0 !important; text-align: left; }
+.ref-head { font-family: var(--label); font-weight: 600; font-size: 9pt; text-transform: uppercase; letter-spacing: 0.08em;
+  margin: 12pt 0 4pt; color: var(--orange); break-after: avoid; }
+.ref-head:first-child { margin-top: 0; }
+p.ref { font-size: 8.2pt; line-height: 1.4; text-indent: 0; text-align: left; margin-bottom: 4pt; hyphens: none; }
+p.ref a { word-break: break-all; color: var(--grey); }
+
+/* Blank pages (inserted before right-hand starts): nothing printed */
+@page :blank {
+  @top-left { content: none; } @top-right { content: none; }
+  @bottom-left { content: none; } @bottom-right { content: none; }
+}
+/* Arabic numbering starts at 1 on the Introduction: render.mjs resets the
+   page counter on the Introduction's page and fills in the TOC numbers. */
+
+.keep-together { break-inside: avoid; }
+.box-label, .box-title { break-after: avoid; }
+.worksheet { break-inside: avoid; }
