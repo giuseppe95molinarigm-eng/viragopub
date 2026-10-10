@@ -138,7 +138,8 @@ def strip_emoji(s):
 
 
 def clean_inline(soup):
-    # Author's request (10 Oct): no dashes in the text; use a comma instead.
+    # Author's request (10 Oct): no dashes in the book's text; use a comma instead.
+    # Decorative dashes in the design (sign-off, folios) stay, per her follow-up.
     for node in list(soup.find_all(string=re.compile("[\u2014\u2013]"))):
         node.replace_with(re.sub(r"\s*[\u2014\u2013]\s*", ", ", str(node)))
     # Pandoc renders Word underlines on links as <span class="underline">.
@@ -399,7 +400,7 @@ def build_chapter(soup, key, h1, elements, epub=False):
                     so = new(soup, "div", "signoff")
                     so.append(new(soup, "p", "signoff-lead", "Let’s show them what you’ve got."))
                     so.append(new(soup, "p", "signoff-big", "<span>See you inside!</span>"))
-                    so.append(new(soup, "p", "signoff-name", "Karina"))
+                    so.append(new(soup, "p", "signoff-name", "— Karina"))
                     body.append(so)
                 i = j
                 continue
