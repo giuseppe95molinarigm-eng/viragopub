@@ -138,6 +138,9 @@ def strip_emoji(s):
 
 
 def clean_inline(soup):
+    # Author's request (10 Oct): no dashes in the text; use a comma instead.
+    for node in list(soup.find_all(string=re.compile("[\u2014\u2013]"))):
+        node.replace_with(re.sub(r"\s*[\u2014\u2013]\s*", ", ", str(node)))
     # Pandoc renders Word underlines on links as <span class="underline">.
     for sp in soup.select("span.underline"):
         sp.unwrap()
@@ -385,7 +388,7 @@ def build_chapter(soup, key, h1, elements, epub=False):
                     gt = text_of(g)
                     if g.find("img"):
                         box.append(linked_insert(soup, "insert-worksheets.png", LINKS["worksheets"],
-                                                 "Download all 15 worksheets — scan the QR code or visit "
+                                                 "Download all 15 worksheets. Scan the QR code or visit "
                                                  "theroyaltycoach.com/book-worksheets"))
                     elif gt.startswith("Let’s show them") or gt.startswith("See you inside"):
                         tail.append(gt)
@@ -396,7 +399,7 @@ def build_chapter(soup, key, h1, elements, epub=False):
                     so = new(soup, "div", "signoff")
                     so.append(new(soup, "p", "signoff-lead", "Let’s show them what you’ve got."))
                     so.append(new(soup, "p", "signoff-big", "<span>See you inside!</span>"))
-                    so.append(new(soup, "p", "signoff-name", "— Karina"))
+                    so.append(new(soup, "p", "signoff-name", "Karina"))
                     body.append(so)
                 i = j
                 continue
@@ -448,7 +451,7 @@ def build_chapter(soup, key, h1, elements, epub=False):
             src = Path(el.find("img")["src"]).name
             if IMAGE_MAP.get(src) == "insert-discovery-call.png":
                 body.append(linked_insert(soup, "insert-discovery-call.png", LINKS["call"],
-                                          "Book your 45-minute discovery call — calendly.com/karina-1-on-1/45min",
+                                          "Book your 45-minute discovery call at calendly.com/karina-1-on-1/45min",
                                           "insert-figure call-insert"))
             i += 1
             continue
