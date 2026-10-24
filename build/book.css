@@ -213,8 +213,9 @@ strong, b { font-weight: 700; }
 .activity p + p, .worksheet p + p, .giveaway p + p { text-indent: 0; margin-top: 5pt; }
 .worksheet { background: transparent; border: 1pt solid var(--ink); border-top: 2.2pt solid var(--ink); }
 .worksheet .box-label span { background: var(--ink); }
-.worksheet .box-label span::before { content: "▣  "; }
-.activity .box-label span::before { content: "✎  "; }
+/* icons drawn as vector shapes (no symbol fonts, so the PDF has no Type 3 fonts) */
+.worksheet .box-label span::before { content: ""; display: inline-block; width: 6.4pt; height: 6.4pt; margin-right: 6pt; vertical-align: -0.6pt; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect x='0.6' y='0.6' width='8.8' height='8.8' fill='none' stroke='white' stroke-width='1.2'/%3E%3Crect x='3' y='3' width='4' height='4' fill='white'/%3E%3C/svg%3E") center / contain no-repeat; }
+.activity .box-label span::before { content: ""; display: inline-block; width: 6.4pt; height: 6.4pt; margin-right: 6pt; vertical-align: -0.6pt; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 9 L1.6 6.6 L7 1.2 L8.8 3 L3.4 8.4 Z' fill='white'/%3E%3C/svg%3E") center / contain no-repeat; }
 
 .mini-head { font-family: var(--label); font-weight: 600; font-size: 8.4pt; text-transform: uppercase; letter-spacing: 0.06em;
   margin: 9pt 0 3pt; color: var(--orange); break-after: avoid; }
@@ -237,8 +238,9 @@ strong, b { font-weight: 700; }
 .signoff-big span { display: inline-block; background: var(--yellow); font-family: var(--head); font-size: 22pt;
   text-transform: uppercase; padding: 3pt 10pt 1pt; margin-top: 4pt; }
 .signoff-name { font-family: var(--label); font-weight: 600; letter-spacing: 0.32em; font-size: 7.5pt; margin-top: 8pt !important; }
-.signoff::after { content: "◆"; display: block; color: var(--orange); font-size: 7pt; margin: 9pt auto 0;
-  width: 2.6in; border-top: 0.7pt solid var(--ink); line-height: 0; padding-top: 0; }
+.signoff::after { content: ""; display: block; width: 2.6in; height: 7pt; margin: 6pt auto 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5 0 L10 5 L5 10 L0 5 Z' fill='%23e5531f'/%3E%3C/svg%3E") center / 6.5pt 6.5pt no-repeat,
+    linear-gradient(var(--ink), var(--ink)) center / 100% 0.7pt no-repeat; }
 .call-insert { margin: 12pt 0 10pt; }
 
 /* ------------------------------------------------------------------ PROVE */

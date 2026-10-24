@@ -7,7 +7,8 @@ Fiverr order for viragopub (Karina G. Sanchez): custom 6 × 9 interior, print-re
 | File | Use |
 |---|---|
 | `The 5-Step Book Launch for Experts - Interior 6x9.pdf` | KDP paperback / hardcover interior. 124 pages, 6.125 × 9.25 in (6 × 9 trim **with bleed**: choose "Bleed" in KDP). All fonts embedded. |
-| `The 5-Step Book Launch for Experts.epub` | Kindle eBook (reflowable, EPUB 3, passes EpubCheck with no errors). |
+| `The 5-Step Book Launch for Experts.epub` | Kindle and IngramSpark eBook (reflowable, EPUB 3, passes EpubCheck with no errors). |
+| `IngramSpark/… IngramSpark.pdf` | IngramSpark interior: same 6.125 × 9.25 in page, PDF/X-3 with CMYK output intent, black text on the K plate only, max ink 200%, no transparency, no annotations, TrimBox/BleedBox set. |
 
 ## Sources
 
@@ -21,6 +22,6 @@ Fiverr order for viragopub (Karina G. Sanchez): custom 6 × 9 interior, print-re
 ./build.sh
 ```
 
-Pipeline: `build/build_html.py` (docx → structured HTML) → `build/render.mjs` (Paged.js in Chromium, `build/book.css`) → `build/finalize_pdf.py` (merges the insert PDFs and trims spine-side bleed) → `build/build_epub.py` (`build/epub.css`).
+Pipeline (Ghostscript is needed for the IngramSpark step): `build/build_html.py` (docx → structured HTML) → `build/render.mjs` (Paged.js in Chromium, `build/book.css`) → `build/finalize_pdf.py` (merges the insert PDFs and trims spine-side bleed) → `build/build_epub.py` (`build/epub.css`) → `build/make_ingram.py` (CMYK PDF/X-3 for IngramSpark).
 
 **Audiobook insert update:** replace `assets/inserts/audiobook.pdf` with the new 6 × 9 PDF, update the link in `build/finalize_pdf.py` (`INSERT_SPECS`) and `build/build_html.py` (`LINKS`) if the URL changes, then run `./build.sh`. For the EPUB image, run `pdftoppm -r 200 -png -singlefile assets/inserts/audiobook.pdf assets/images/epub-audiobook`.
