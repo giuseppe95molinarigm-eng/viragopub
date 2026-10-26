@@ -35,7 +35,7 @@ IMAGE_MAP = {
     "image4.png": "insert-video-summary.png",
     "image1.png": "insert-social.png",
     "image6.png": "insert-worksheets.png",
-    "image5.png": "insert-discovery-call.png",
+    "image5.png": "insert-discovery-call.jpg",
 }
 
 # Chapter opener copy: (label, title, tag line)
@@ -450,8 +450,8 @@ def build_chapter(soup, key, h1, elements, epub=False):
         # --- Chapter 3 discovery-call call to action + insert
         if el.name == "p" and el.find("img"):
             src = Path(el.find("img")["src"]).name
-            if IMAGE_MAP.get(src) == "insert-discovery-call.png":
-                body.append(linked_insert(soup, "insert-discovery-call.png", LINKS["call"],
+            if IMAGE_MAP.get(src) == "insert-discovery-call.jpg":
+                body.append(linked_insert(soup, "insert-discovery-call.jpg", LINKS["call"],
                                           "Book your 45-minute discovery call at calendly.com/karina-1-on-1/45min",
                                           "insert-figure call-insert"))
             i += 1

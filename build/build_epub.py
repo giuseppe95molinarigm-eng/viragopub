@@ -98,7 +98,8 @@ def main():
         p = ASSETS / "images" / Path(src).name
         if p.name == "cover.jpg":
             continue
-        book.add_item(epub.EpubItem(uid=p.stem, file_name=src, media_type="image/png", content=p.read_bytes()))
+        mt = "image/jpeg" if p.suffix.lower() in (".jpg", ".jpeg") else "image/png"
+        book.add_item(epub.EpubItem(uid=p.stem, file_name=src, media_type=mt, content=p.read_bytes()))
 
     book.toc = toc_links
     book.spine = spine

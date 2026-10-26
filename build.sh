@@ -11,3 +11,6 @@ python3 build/build_epub.py "output/The 5-Step Book Launch for Experts.epub"
 mkdir -p output/IngramSpark
 python3 build/make_ingram.py "output/The 5-Step Book Launch for Experts - Interior 6x9.pdf" \
   "output/IngramSpark/The 5-Step Book Launch for Experts - Interior 6x9 IngramSpark.pdf"
+# IngramSpark eBook cover image: front panel of the KDP paperback cover at native resolution
+python3 build/make_ebook_cover.py source/Cover-Paperback-KDP.pdf \
+  "output/IngramSpark/The 5-Step Book Launch for Experts - Ebook Cover IngramSpark.jpg"

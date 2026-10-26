@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Make the IngramSpark print interior from the KDP print PDF.
 
-IngramSpark preflight wants CMYK (no RGB), an output intent (PDF/X), no
+IngramSpark preflight wants CMYK (no RGB), no ICC profiles (PDF/X-1a:2001), no
 annotations, and TrimBox/BleedBox on every page. The page size is the same as
 KDP's (6.125 x 9.25 in: 6 x 9 trim, 0.125 in bleed on top, bottom and outside).
 
@@ -21,7 +21,6 @@ from pypdf import PdfReader, PdfWriter
 from pypdf.generic import NameObject, RectangleObject
 
 BLEED = 9.0
-ICC = "/usr/share/ghostscript/10.02.1/iccprofiles/default_cmyk.icc"
 
 
 def prepare(src, dst):
@@ -44,27 +43,42 @@ def prepare(src, dst):
 
 
 def pdfx_def(path, title):
+    # PDF/X-1a:2001 with a registered characterisation (CGATS TR 001 = US web
+    # coated SWOP) and NO embedded ICC profile: IngramSpark rejects files that
+    # contain ICC colour profiles.
     Path(path).write_text(f"""%!
-[ /GTS_PDFXVersion (PDF/X-3:2002)
+[ /GTS_PDFXVersion (PDF/X-1a:2001)
+  /GTS_PDFXConformance (PDF/X-1a:2001)
   /Title ({title})
   /Trapped /False
 /DOCINFO pdfmark
-/ICCProfile ({ICC}) def
-[/_objdef {{icc_PDFX}} /type /stream /OBJ pdfmark
-[{{icc_PDFX}} << /N 4 >> /PUT pdfmark
-[{{icc_PDFX}} ICCProfile (r) file /PUT pdfmark
 [/_objdef {{OutputIntent_PDFX}} /type /dict /OBJ pdfmark
 [{{OutputIntent_PDFX}} <<
   /Type /OutputIntent
   /S /GTS_PDFX
   /OutputCondition (Commercial and specialty printing)
-  /Info (none)
+  /Info (U.S. Web Coated SWOP)
   /OutputConditionIdentifier (CGATS TR 001)
   /RegistryName (http://www.color.org)
-  /DestOutputProfile {{icc_PDFX}}
 >> /PUT pdfmark
 [{{Catalog}} <</OutputIntents [ {{OutputIntent_PDFX}} ]>> /PUT pdfmark
 """)
+
+
+def check_no_icc(path):
+    """Fail if anything in the file is an ICC profile or an ICCBased colour space."""
+    reader = PdfReader(path)
+    for num in range(1, int(reader.trailer["/Size"])):
+        try:
+            obj = reader.get_object(num)
+        except Exception:
+            continue
+        if obj is None:
+            continue
+        if isinstance(obj, list) and obj and obj[0] == "/ICCBased":
+            raise SystemExit(f"ICCBased colour space left in object {num}")
+        if hasattr(obj, "get") and "/DestOutputProfile" in obj:
+            raise SystemExit("OutputIntent still carries an ICC profile")
 
 
 def main():
@@ -75,7 +89,7 @@ def main():
         prepare(src, prepared)
         pdfx_def(defs, "The 5-Step Book Launch for Experts")
         subprocess.run([
-            "gs", "-q", "-dBATCH", "-dNOPAUSE", "-dSAFER", f"--permit-file-read={ICC}",
+            "gs", "-q", "-dBATCH", "-dNOPAUSE", "-dSAFER",
             "-sDEVICE=pdfwrite", "-dPDFX=true", "-dCompatibilityLevel=1.4",
             "-sColorConversionStrategy=CMYK", "-sProcessColorModel=DeviceCMYK",
             "-dUseFastColor=true", "-dOverrideICC=true",
@@ -88,6 +102,7 @@ def main():
             "-c", "{} setblackgeneration {} setundercolorremoval",
             "-f", defs, prepared,
         ], check=True)
+    check_no_icc(out)
     print("wrote", out)
 
 
