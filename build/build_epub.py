@@ -7,6 +7,7 @@ import uuid
 from pathlib import Path
 
 from bs4 import BeautifulSoup
+from PIL import Image
 from ebooklib import epub
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -37,6 +38,8 @@ def main():
                       "The Insider’s Guide to Self-Publish Your Book, Nail Your Launch, "
                       "and Turn Readers Into High-Paying Clients")
     book.add_metadata("DC", "rights", f"Copyright © {build_html.COPYRIGHT_YEAR} Karina G. Sanchez")
+    cw, ch = Image.open(ASSETS / "images" / "cover.jpg").size
+    assert cw * ch <= 3_200_000, "cover.jpg exceeds IngramSpark's 3.2 MP EPUB image limit"
     book.set_cover("images/cover.jpg", (ASSETS / "images" / "cover.jpg").read_bytes())
 
     css = epub.EpubItem(uid="style", file_name="style/epub.css", media_type="text/css",
@@ -99,6 +102,8 @@ def main():
         if p.name == "cover.jpg":
             continue
         mt = "image/jpeg" if p.suffix.lower() in (".jpg", ".jpeg") else "image/png"
+        w, h = Image.open(p).size
+        assert w * h <= 3_200_000, f"{p.name}: {w}x{h} exceeds IngramSpark's 3.2 MP EPUB image limit"
         book.add_item(epub.EpubItem(uid=p.stem, file_name=src, media_type=mt, content=p.read_bytes()))
 
     book.toc = toc_links
