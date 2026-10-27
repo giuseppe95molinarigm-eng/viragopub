@@ -14,6 +14,7 @@ Fiverr order for viragopub (Karina G. Sanchez): custom 6 × 9 interior, print-re
 
 - `source/Manuscript.docx`: the final manuscript (Manuscript_1 from the author's Drive folder; copyright 2027, includes the dedication).
 - `assets/inserts/*.pdf`: the author's insert pages (audiobook, video training, YouTube/Instagram, worksheets opt-in). In print they are placed as vector pages with clickable links.
+- `assets/inserts/audiobook.pdf`: the "Download the audiobook" insert (sent 27 Oct, replaces the earlier "Reserve" version); links to www.theroyaltycoach.com/audiobook-download.
 - `assets/inserts/discovery-call.pdf`: the "Book your call" insert (high-resolution version sent 26 Oct); placed in the book as `assets/images/insert-discovery-call.jpg` (300+ ppi at its printed size).
 - `source/Cover-Paperback-KDP.pdf`: the author's KDP paperback cover, used for the IngramSpark eBook cover image.
 

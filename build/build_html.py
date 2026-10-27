@@ -21,7 +21,7 @@ COPYRIGHT_YEAR = "2027"  # per author's note (Google Doc version), 8 Oct
 
 # Clickable link targets for the inserts (from the URLs printed on each insert).
 LINKS = {
-    "audiobook": "https://theroyaltycoach.com/free-audiobook",
+    "audiobook": "https://www.theroyaltycoach.com/audiobook-download",
     "video": "https://www.theroyaltycoach.com/prove-method-video",
     "youtube": "https://youtube.com/@theroyaltycoach",
     "instagram": "https://instagram.com/karina.g.sanchez",
@@ -577,7 +577,7 @@ def toc_section(soup, chapters):
 # in the EPUB they are images wrapped in links.
 INSERTS = [
     ("audiobook", "audiobook.pdf", "epub-audiobook.png", ["audiobook"],
-     "Reserve the audiobook version of this book for free. Scan the QR code or visit theroyaltycoach.com/free-audiobook"),
+     "Download the audiobook version of this book for free. Scan the QR code or visit theroyaltycoach.com/audiobook-download"),
     ("video", "video-training.pdf", "epub-video-training.png", ["video"],
      "Want a video summary of this book? Scan to watch or visit www.theroyaltycoach.com/prove-method-video"),
     ("social", "youtube-instagram.pdf", "epub-youtube-instagram.png", ["youtube", "instagram"],

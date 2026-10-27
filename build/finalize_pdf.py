@@ -25,8 +25,8 @@ TRIM_W, TRIM_H = 432.0, 648.0
 # Background colour of each insert (for the bleed area) and extra link areas
 # (x0, y0, x1, y1 in the insert's own 432 x 648 pt space).
 INSERT_SPECS = {
-    "audiobook.pdf": {"bg": (0.957, 0.933, 0.890), "links": [
-        ("https://www.theroyaltycoach.com/free-audiobook", (24, 37, 408, 164))]},
+    "audiobook.pdf": {"bg": (0.965, 0.941, 0.894), "links": [
+        ("https://www.theroyaltycoach.com/audiobook-download", (24, 37, 408, 164))]},
     "video-training.pdf": {"bg": (1, 1, 1), "links": [
         ("https://www.theroyaltycoach.com/prove-method-video", (45, 45, 387, 155)),
         ("https://www.theroyaltycoach.com/prove-method-video", (50, 177, 382, 369))]},
