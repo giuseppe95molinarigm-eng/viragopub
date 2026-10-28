@@ -23,9 +23,21 @@ from pypdf.generic import NameObject, RectangleObject
 BLEED = 9.0
 
 
+def last_page_is_blank(page):
+    res = page.get("/Resources") or {}
+    return not page.extract_text().strip() and not (res.get("/XObject") or {})
+
+
 def prepare(src, dst):
     reader = PdfReader(src)
     writer = PdfWriter(clone_from=reader)
+    # IngramSpark prints its manufacturing barcode on the last page, which must be
+    # blank, and needs an even page count; otherwise it adds pages itself and the
+    # cover template's page count (and spine) no longer matches the file.
+    if not last_page_is_blank(writer.pages[-1]):
+        w, h = float(writer.pages[-1].mediabox.width), float(writer.pages[-1].mediabox.height)
+        writer.add_blank_page(w, h)
+        writer.add_blank_page(w, h)
     for i, page in enumerate(writer.pages):
         w, h = float(page.mediabox.width), float(page.mediabox.height)
         recto = i % 2 == 0  # bleed on the right for rectos, on the left for versos
@@ -81,13 +93,11 @@ def check_no_icc(path):
             raise SystemExit("OutputIntent still carries an ICC profile")
 
 
-def main():
-    src, out = sys.argv[1], sys.argv[2]
+def to_pdfx(prepared, out, title="The 5-Step Book Launch for Experts"):
+    """Convert a prepared PDF to CMYK PDF/X-1a:2001 (no ICC) with Ghostscript."""
     with tempfile.TemporaryDirectory() as tmp:
-        prepared = str(Path(tmp) / "prepared.pdf")
         defs = str(Path(tmp) / "pdfx_def.ps")
-        prepare(src, prepared)
-        pdfx_def(defs, "The 5-Step Book Launch for Experts")
+        pdfx_def(defs, title)
         subprocess.run([
             "gs", "-q", "-dBATCH", "-dNOPAUSE", "-dSAFER",
             "-sDEVICE=pdfwrite", "-dPDFX=true", "-dCompatibilityLevel=1.4",
@@ -96,6 +106,7 @@ def main():
             "-dEmbedAllFonts=true", "-dSubsetFonts=true",
             "-dAutoRotatePages=/None", "-dPreserveAnnots=false",
             "-dDownsampleColorImages=false", "-dDownsampleGrayImages=false",
+            "-dDownsampleMonoImages=false",
             "-dAutoFilterColorImages=false", "-sColorImageFilter=FlateEncode",
             f"-sOutputFile={out}",
             # full grey-component replacement: neutrals and black text go to K only
@@ -103,7 +114,15 @@ def main():
             "-f", defs, prepared,
         ], check=True)
     check_no_icc(out)
-    print("wrote", out)
+
+
+def main():
+    src, out = sys.argv[1], sys.argv[2]
+    with tempfile.TemporaryDirectory() as tmp:
+        prepared = str(Path(tmp) / "prepared.pdf")
+        prepare(src, prepared)
+        to_pdfx(prepared, out)
+    print("wrote", out, len(PdfReader(out).pages), "pages")
 
 
 if __name__ == "__main__":

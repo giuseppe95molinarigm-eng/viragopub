@@ -14,3 +14,6 @@ python3 build/make_ingram.py "output/The 5-Step Book Launch for Experts - Interi
 # IngramSpark eBook cover image: front panel of the KDP paperback cover at native resolution
 python3 build/make_ebook_cover.py source/Cover-Paperback-KDP.pdf \
   "output/IngramSpark/The 5-Step Book Launch for Experts - Ebook Cover IngramSpark.jpg"
+# IngramSpark paperback cover: KDP cover artwork on IngramSpark's template (spine 0.268 in, 126 pages)
+python3 build/make_ingram_cover.py source/Cover-Paperback-KDP.pdf source/IngramSpark-Cover-Template-9781069528292.pdf \
+  "output/IngramSpark/The 5-Step Book Launch for Experts - Paperback Cover IngramSpark.pdf"
